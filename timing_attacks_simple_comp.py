@@ -27,13 +27,14 @@ def create_bad_password(lenght):
         stupid += "A"
     return(stupid)
 
-#vamos a suponer que el password es de maximo 20 caracteres
+#lo que estoy haciendo es mandar caracteres de diferentes longitudes para adivinar el tamaño de la llave
 def crack_password_lengh():
     promedios = []
-    for i in range(1,21):
+    #vamos a suponer que el password es de maximo 30 caracteres
+    for i in range(30):
         prom = []
         #hago esto 1000 veces para saber cuanto se demora
-        for i in range(10000):
+        for j in range(10000):
             password = create_bad_password(i)
             #calculo el tiempo que se demora la funcion
             init = time.time()
@@ -42,7 +43,11 @@ def crack_password_lengh():
             total_time = end-init
             prom.append(total_time)
         media = np.mean(prom)
+        promedios.append(media)
         print(media)
+    #ahora agarro el mayor y ya
+    password_lenght = np.argmax(promedios)
+    print(f"la longitud de la llave es {password_lenght}")
 
 crack_password_lengh()
 
