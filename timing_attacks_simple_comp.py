@@ -15,7 +15,7 @@ def comp(str1 , str2):
 
 
 def simple_login(password):
-    real_password = "ELCHAMAN"
+    real_password = "HOLA"
     if(comp(real_password , password)):
         return(True)
     else:
@@ -50,7 +50,7 @@ def crack_password_lengh():
     return(password_lenght)
 
 def crack_key():
-    dictionary = [chr(i) for i in range(ord("A"),ord("Z") + 4)]
+    dictionary = [chr(i) for i in range(ord("A") , ord("Z")+1)]
     password_lenght = crack_password_lengh()
     password = []
     pad = ""
@@ -60,7 +60,7 @@ def crack_key():
         proms_dictionary = []
         for j in dictionary:
             prom = []
-            for x in range(1000000):
+            for x in range(200000):
                 pad = real_pad + j
                 palabra_prueba =f"{pad:<0{password_lenght}}"
                 init = time.time()
@@ -75,6 +75,7 @@ def crack_key():
         real_pad += letter
         print(real_pad)
     password = real_pad
+    print(f"password is {password}")
     return(password)
 
 
