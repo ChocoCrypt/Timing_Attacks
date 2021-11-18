@@ -44,7 +44,6 @@ def crack_password_lengh():
             prom.append(total_time)
         media = np.mean(prom)
         promedios.append(media)
-        print(media)
     #ahora agarro el mayor y ya
     password_lenght = np.argmax(promedios)
     print(f"la longitud de la llave es {password_lenght}")
