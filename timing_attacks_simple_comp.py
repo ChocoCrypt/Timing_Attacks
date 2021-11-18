@@ -15,9 +15,9 @@ def comp(str1 , str2):
 
 
 def simple_login(password):
-    real_password = "JUEPUTA"
+    real_password = "ELCHAMAN"
     if(comp(real_password , password)):
-        print("You're in'")
+        return(True)
     else:
         return(False)
 
@@ -49,21 +49,35 @@ def crack_password_lengh():
     print(f"la longitud de la llave es {password_lenght}")
     return(password_lenght)
 
-def replace_index(string,index , letter):
-    try:
-        string = list(string)
-        string[index] =  letter
-        string = "".join(string)
-        return(string)
-    except:
-        return(string)
-
 def crack_key():
-    dictionary = [chr(i) for i in range(ord("A"),ord("Z")+1)]
+    dictionary = [chr(i) for i in range(ord("A"),ord("Z") + 4)]
     password_lenght = crack_password_lengh()
     password = []
-    palabra_prueba = create_bad_password(password_lenght)
-    #entonces ahora lo que hacemos es intentar cada caracter n veces y según el tiempo de respuesta pues nos quedamos con el mayor
+    pad = ""
+    real_pad = ""
+    palabra_prueba =f"{pad:<0{password_lenght}}"
+    for l in range(password_lenght):
+        proms_dictionary = []
+        for j in dictionary:
+            prom = []
+            for x in range(1000000):
+                pad = real_pad + j
+                palabra_prueba =f"{pad:<0{password_lenght}}"
+                init = time.time()
+                simple_login(palabra_prueba)
+                stop = time.time()
+                total = stop - init
+                prom.append(total)
+            promedio = np.mean(prom)
+            proms_dictionary.append(promedio)
+        chr_index = np.argmax(proms_dictionary)
+        letter = dictionary[chr_index]
+        real_pad += letter
+        print(real_pad)
+    password = real_pad
+    return(password)
+
+
 #crack_password_lengh()
 crack_key()
 
